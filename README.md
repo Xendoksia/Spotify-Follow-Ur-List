@@ -30,7 +30,7 @@ ve bir önceki kontrolle karşılaştırır. Böylece kaybolan şarkıların ad�
 ### 1. Dosyaları indir
 
 ```
-git clone https://github.com/<kullanici-adi>/spotify-liste-takip.git
+git clone https://github.com/Xendoksia/Spotify-Follow-Ur-List.git
 ```
 
 ya da GitHub'da **Code → Download ZIP** ile indirip bir klasöre çıkar.
