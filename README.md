@@ -106,6 +106,10 @@ Bütün veriler sadece senin bilgisayarında, program klasöründe durur:
 | `Spotify Liste Takip.bat` | Windows'ta çift tıklayıp açmak için |
 | `config.example.json` | Komut satırı için örnek ayar dosyası |
 
+## Lisans
+
+[MIT](LICENSE): serbestçe kullanabilir, değiştirebilir ve paylaşabilirsin.
+
 ---
 
 Bu proje Spotify ile bağlantılı değildir ve Spotify tarafından onaylanmamıştır.
