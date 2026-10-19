@@ -53,8 +53,6 @@ class App(tk.Tk):
         if not self._has_credentials():
             self.after(200, self._open_settings)
 
-    # ------------------------------------------------------------ layout
-
     def _build_ui(self):
         header = ttk.Frame(self, padding=(10, 8, 10, 0))
         header.pack(fill="x")
@@ -177,8 +175,6 @@ class App(tk.Tk):
                  "The change happened between the previous check and this time.",
         ).pack(anchor="w", pady=(6, 0))
 
-    # ------------------------------------------------------------ helpers
-
     def _has_credentials(self):
         config = tracker.load_config()
         return bool(config.get("CLIENT_ID") and config.get("CLIENT_SECRET"))
@@ -228,8 +224,6 @@ class App(tk.Tk):
             messagebox.showerror("Error", error, parent=self)
         else:
             on_success(result)
-
-    # ------------------------------------------------------------ playlists
 
     def _load_tracked(self):
         for p in tracker.tracked_playlists():
@@ -349,8 +343,6 @@ class App(tk.Tk):
 
         self._run_in_background(lambda: tracker.connect().playlist_name(playlist_id), on_success)
 
-    # ------------------------------------------------------------ check
-
     def _check(self):
         selected = [pid for pid, p in self.playlists.items() if p["tracked"]]
         if not selected:
@@ -413,8 +405,6 @@ class App(tk.Tk):
         self._refresh_history()
         self._set_status(f"Check complete: {len(results)} playlists, {total_changes} changes.")
 
-    # ------------------------------------------------------------ history
-
     def _refresh_history(self):
         selected_playlist = self.playlist_filter.get()
         playlist_id = None
@@ -440,8 +430,6 @@ class App(tk.Tk):
         if path:
             count = tracker.export_csv(path)
             self._set_status(f"{count} records exported to {path}")
-
-    # ------------------------------------------------------------ settings
 
     def _open_settings(self):
         window = tk.Toplevel(self)

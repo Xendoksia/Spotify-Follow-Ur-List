@@ -113,12 +113,3 @@ Both are listed in `.gitignore` and are never committed. The app does not connec
 | `tracker.py` | Spotify client, diff logic, database and command line |
 | `Spotify Playlist Tracker.bat` | Double-click launcher for Windows |
 | `config.example.json` | Sample configuration file |
-
-## License
-
-[MIT](LICENSE)
-
----
-
-This project is not affiliated with or endorsed by Spotify.
-Data is retrieved through the [Spotify Web API](https://developer.spotify.com/documentation/web-api).

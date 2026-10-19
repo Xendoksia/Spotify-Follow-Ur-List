@@ -60,8 +60,6 @@ class LoginRequired(SpotifyError):
     pass
 
 
-# ---------------------------------------------------------------- Config
-
 def load_config() -> dict:
     if CONFIG_PATH.exists():
         return json.loads(CONFIG_PATH.read_text(encoding="utf-8"))
@@ -75,8 +73,6 @@ def save_config(config: dict) -> None:
 def market() -> str:
     return load_config().get("MARKET") or DEFAULT_MARKET
 
-
-# ---------------------------------------------------------------- Spotify API
 
 class SpotifyClient:
     def __init__(self, client_id: str | None, client_secret: str | None):
@@ -291,8 +287,6 @@ def parse_playlist_id(link: str) -> str:
     raise SpotifyError(f"Not a valid Spotify playlist link: {link}")
 
 
-# ---------------------------------------------------------------- Database
-
 SCHEMA = """
 CREATE TABLE IF NOT EXISTS playlists (
     playlist_id TEXT PRIMARY KEY,
@@ -376,8 +370,6 @@ def track_label(track: dict) -> str:
     return f"{track['artist']} - {track['name']}" if track.get("artist") else track.get("name", "")
 
 
-# ---------------------------------------------------------------- Check
-
 def check_playlist(client: SpotifyClient, playlist_id: str) -> dict:
     """Fetch a playlist, diff it against the previous snapshot, record events and return the result."""
     name = client.playlist_name(playlist_id)
@@ -449,8 +441,6 @@ def export_csv(path: str = "history.csv") -> int:
                              r["album"], format_date(r["added_at"]), r["uri"]])
     return len(rows)
 
-
-# ---------------------------------------------------------------- Command line
 
 def _print_result(result: dict) -> None:
     print(f"Playlist: {result['name']}  ({result['total']} tracks)")
