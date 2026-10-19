@@ -1,116 +1,124 @@
-# Spotify Liste Takip
+# Spotify Playlist Tracker
 
-Spotify çalma listelerinden şarkılar "kendiliğinden" kayboluyor mu? Bu program listelerinin geçmişini tutar:
-hangi şarkı **ne zaman eklendi**, hangisi **ne zaman çıktı**, hangisi **artık çalınamaz** hale geldi.
+Are tracks silently disappearing from your Spotify playlists? This app keeps a history of your playlists:
+which track was **added when**, which one was **removed when**, and which one became **unplayable**.
 
-Spotify bir şarkının listeden ne zaman çıktığını saklamaz. Program her kontrolde listenin o anki halini kaydeder
-ve bir önceki kontrolle karşılaştırır. Böylece kaybolan şarkıların adı, sanatçısı ve listeye eklenme tarihi elinde kalır.
+Spotify does not record when a track leaves a playlist. On every check the app saves a snapshot of the playlist
+and compares it with the previous one, so the title, artist and original add date of every vanished track stay on record.
 
-## Özellikler
+## Features
 
-- Spotify hesabınla giriş yapıp listelerini (gizli listeler dahil) tek tuşla getirme
-- İstediğin listeleri işaretleyip takip etme
-- Her kontrolde değişiklik raporu:
-  - **+ Eklendi**: listeye yeni gelen şarkı ve eklenme tarihi
-  - **− Çıktı**: listeden kaybolan şarkı, ne zaman eklendiği ve en son ne zaman görüldüğü
-  - **! Oynatılamaz**: listede duran ama artık Türkiye'de çalınamayan şarkı (lisans süresi biten şarkılar Spotify'da gri görünür ya da gizlenir; kaybolan şarkıların çoğu aslında bunlardır)
-  - **✓ Düzeldi**: tekrar çalınabilir hale gelen şarkı
-- Liste ve olay türüne göre süzülebilen geçmiş ekranı
-- Geçmişi Excel'de açılabilen CSV dosyasına aktarma
-- Ek kurulum yok: sadece Python'un kendi kütüphaneleri kullanılır
+- Log in with your Spotify account and load your playlists (including private ones) with one click
+- Select the playlists you want to track
+- A change report on every check:
+  - **+ Added**: new tracks and when they were added
+  - **− Removed**: tracks that disappeared, when they were added and when they were last seen
+  - **! Unplayable**: tracks still in the playlist but no longer playable in your market (expired licenses are greyed out or hidden by Spotify; most "vanished" tracks are actually these)
+  - **✓ Playable again**: tracks that became playable again
+- History view filterable by playlist and event type
+- Export the history to a CSV file that opens in Excel
+- No dependencies: only the Python standard library is used
 
-## Gereksinimler
+## Requirements
 
-- Windows, macOS veya Linux
-- [Python 3.9+](https://www.python.org/downloads/). Windows'ta kurarken "Add Python to PATH" kutusunu işaretleyin.
-- Bir Spotify hesabı. Spotify, geliştirici uygulaması oluşturan hesabın **Premium** olmasını istiyor.
+- Windows, macOS or Linux
+- [Python 3.9+](https://www.python.org/downloads/). On Windows, tick "Add Python to PATH" during installation.
+- A Spotify account. Spotify requires the account that creates a developer app to be **Premium**.
 
-## Kurulum
+## Setup
 
-### 1. Dosyaları indir
+### 1. Get the code
 
 ```
 git clone https://github.com/Xendoksia/Spotify-Follow-Ur-List.git
 ```
 
-ya da GitHub'da **Code → Download ZIP** ile indirip bir klasöre çıkar.
+or download it via **Code → Download ZIP** on GitHub and extract it.
 
-### 2. Spotify geliştirici uygulaması oluştur (bir kerelik)
+### 2. Create a Spotify developer app (one time)
 
-1. https://developer.spotify.com/dashboard adresine Spotify hesabınla giriş yap.
-2. **Create app** butonuna bas ve formu doldur:
-   - **App name / description:** istediğin herhangi bir şey
-   - **Redirect URI:** `http://127.0.0.1:8888/callback` yaz ve **Add**'e bas. Birebir aynı olmalı.
-   - **Which API/SDKs:** **Web API**'yi işaretle
-3. Kaydet, sonra uygulamanın **Settings** sayfasından **Client ID** ve **Client Secret** değerlerini kopyala.
+1. Log in at https://developer.spotify.com/dashboard with your Spotify account.
+2. Click **Create app** and fill in the form:
+   - **App name / description:** anything you like
+   - **Redirect URI:** enter `http://127.0.0.1:8888/callback` and click **Add**. It must match exactly.
+   - **Which API/SDKs:** tick **Web API**
+3. Save, then copy the **Client ID** and **Client Secret** from the app's **Settings** page.
 
-### 3. Programı çalıştır
-
-```
-python uygulama.py
-```
-
-Windows'ta **`Spotify Liste Takip.bat`** dosyasına çift tıklaman da yeterli.
-
-İlk açılışta çıkan ayar penceresine Client ID ve Client Secret değerlerini gir. Sonra **Spotify ile giriş yap**
-butonuna bas ve tarayıcıda açılan sayfada onay ver. Bunu bir kere yapman yeterli, program oturumu hatırlar.
-
-## Kullanım
-
-1. **Spotify'daki listelerimi getir** butonuna bas.
-2. Takip etmek istediğin listelerin **☐** kutucuğuna tıkla. Bir listeye çift tıklarsan Spotify'da açılır.
-3. **▶ Seçilenleri kontrol et** butonuna bas.
-4. Sonuçları **Geçmiş** sekmesinde gör, istersen **CSV'ye aktar**.
-
-Her listenin ilk kontrolü başlangıç kaydını alır. Değişiklikler ikinci kontrolden itibaren görünür.
-Ne kadar sık kontrol edersen bir şarkının ne zaman çıktığını o kadar kesin bilirsin.
-
-### Komut satırı
+### 3. Run the app
 
 ```
-python spotify.py giris                                      # Spotify hesabıyla giriş
-python spotify.py kontrol https://open.spotify.com/playlist/...  # listeyi kontrol et
-python spotify.py gecmis                                     # geçmişi yazdır
-python spotify.py csv gecmis.csv                             # geçmişi CSV'ye aktar
+python app.py
 ```
 
-Komut satırı kullanılacaksa önce `config.example.json` dosyasını `config.json` adıyla kopyalayıp
-Client ID ve Client Secret değerlerini içine yaz.
+On Windows you can also double-click **`Spotify Playlist Tracker.bat`**.
 
-## Sınırlamalar
+On first launch, enter your Client ID and Client Secret in the settings window. Then click **Log in with Spotify**
+and approve access in the browser. You only need to do this once; the app remembers your session.
 
-- **Sadece kendi listelerin:** Spotify'ın 2026 kurallarına göre program sadece **senin oluşturduğun veya ortak
-  düzenlediğin** listelerin şarkılarını okuyabilir. Başkalarının listeleri, takip etsen bile kontrol edilemez.
-- **Kontrol sıklığı:** Program sadece sen çalıştırdığında kontrol yapar. Bir şarkının çıkış zamanı "bir önceki kontrol
-  ile bu kontrol arasında" olarak görünür.
-- **Kullanıcı sınırı:** Spotify'ın geliştirici modunda bir uygulamayla en fazla 5 kişi giriş yapabilir. Bu yüzden
-  herkesin kendi Client ID'sini oluşturması gerekir.
+## Usage
 
-## Veriler ve gizlilik
+1. Click **Load my Spotify playlists**.
+2. Click the **☐** box of each playlist you want to track. Double-click a playlist to open it in Spotify.
+3. Click **▶ Check selected**.
+4. See the results in the **History** tab and optionally **Export CSV**.
 
-Bütün veriler sadece senin bilgisayarında, program klasöründe durur:
+The first check of each playlist records an initial snapshot. Changes appear from the second check on.
+The more often you check, the more precisely you know when a track was removed.
 
-| Dosya | İçerik |
+### Command line
+
+```
+python tracker.py login                                          # log in with Spotify
+python tracker.py check https://open.spotify.com/playlist/...    # check a playlist
+python tracker.py history                                        # print the history
+python tracker.py export history.csv                             # export the history to CSV
+```
+
+To use the command line without the GUI, copy `config.example.json` to `config.json` and fill in
+your Client ID and Client Secret.
+
+### Configuration
+
+| Key | Description |
 |---|---|
-| `config.json` | Client ID, Client Secret ve Spotify oturumu. **Kimseyle paylaşma.** |
-| `gecmis.db` | Listelerinin ve değişikliklerin geçmişi (SQLite) |
+| `CLIENT_ID` | Client ID of your Spotify developer app |
+| `CLIENT_SECRET` | Client Secret of your Spotify developer app |
+| `MARKET` | Country code used to check playability (optional, default `TR`) |
 
-İkisi de `.gitignore` dosyasında listelendiği için GitHub'a gönderilmez. Program, Spotify dışında hiçbir yere bağlanmaz.
+## Limitations
 
-## Dosyalar
+- **Your own playlists only:** under Spotify's 2026 API rules the app can only read tracks of playlists you
+  **own or collaborate on**. Playlists of other users cannot be checked, even if you follow them.
+- **Check frequency:** the app only checks when you run it. A removal is reported as having happened
+  "between the previous check and this one".
+- **User limit:** in development mode, at most 5 users can log in to a Spotify app, so everyone should
+  create their own Client ID.
 
-| Dosya | Açıklama |
+## Data and privacy
+
+All data stays on your computer, in the app folder:
+
+| File | Contents |
 |---|---|
-| `uygulama.py` | Pencereli arayüz (tkinter) |
-| `spotify.py` | Spotify bağlantısı, karşılaştırma mantığı, veritabanı ve komut satırı |
-| `Spotify Liste Takip.bat` | Windows'ta çift tıklayıp açmak için |
-| `config.example.json` | Komut satırı için örnek ayar dosyası |
+| `config.json` | Client ID, Client Secret and Spotify session. **Do not share it.** |
+| `history.db` | History of your playlists and changes (SQLite) |
 
-## Lisans
+Both are listed in `.gitignore` and are never committed. The app does not connect to anything other than Spotify.
 
-[MIT](LICENSE): serbestçe kullanabilir, değiştirebilir ve paylaşabilirsin.
+## Files
+
+| File | Description |
+|---|---|
+| `app.py` | Graphical interface (tkinter) |
+| `tracker.py` | Spotify client, diff logic, database and command line |
+| `Spotify Playlist Tracker.bat` | Double-click launcher for Windows |
+| `config.example.json` | Sample configuration file |
+
+## License
+
+[MIT](LICENSE)
 
 ---
 
-Bu proje Spotify ile bağlantılı değildir ve Spotify tarafından onaylanmamıştır.
-Spotify verileri [Spotify Web API](https://developer.spotify.com/documentation/web-api) üzerinden alınır.
+This project is not affiliated with or endorsed by Spotify.
+Data is retrieved through the [Spotify Web API](https://developer.spotify.com/documentation/web-api).

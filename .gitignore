@@ -1,12 +1,11 @@
-# Kişisel ayarlar: Client ID / Secret ve Spotify oturumu (ASLA paylaşmayın)
+# Personal settings: Client ID / Secret and Spotify session (never share)
 config.json
 
-# Kişisel şarkı geçmişi veritabanı
-gecmis.db
+# Local history database
 *.db
 *.db-journal
 
-# Dışa aktarılan geçmiş dosyaları
+# Exported history
 *.csv
 
 # Python
@@ -15,7 +14,7 @@ __pycache__/
 .venv/
 venv/
 
-# Editör / işletim sistemi
+# Editor / OS
 .vscode/
 .idea/
 Thumbs.db

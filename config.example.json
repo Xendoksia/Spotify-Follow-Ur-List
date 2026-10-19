@@ -1,4 +1,5 @@
 {
-  "CLIENT_ID": "buraya-client-id",
-  "CLIENT_SECRET": "buraya-client-secret"
+  "CLIENT_ID": "your-client-id",
+  "CLIENT_SECRET": "your-client-secret",
+  "MARKET": "TR"
 }
